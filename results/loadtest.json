@@ -1,0 +1,605 @@
+{
+  "generated": "2026-11-10T14:48:02",
+  "python": "3.12.4",
+  "platform": "macOS-26.7.1-x86_64-i386-64bit",
+  "note": "SIMULATED LLM latency (MockLLM); real asyncio scheduling",
+  "loads": [
+    {
+      "load_label": "high_21rps",
+      "rates": {
+        "heavy": 12.0,
+        "light1": 3.0,
+        "light2": 3.0,
+        "light3": 3.0
+      },
+      "seed": 7,
+      "slots": 8,
+      "slo_s": 1.5,
+      "duration_s": 10.0,
+      "runs": [
+        {
+          "config": {
+            "name": "fifo_naive",
+            "fair": false,
+            "deadline_propagation": false,
+            "cancel_tree": false,
+            "admission": false
+          },
+          "requests": 219,
+          "status": {
+            "ok": 3,
+            "late": 216
+          },
+          "on_time_rate": 0.0137,
+          "deadline_miss_rate_admitted": 0.9863,
+          "deadline_miss_or_reject_rate": 0.9863,
+          "p50_ok_s": 1.3895,
+          "p95_ok_s": 1.393,
+          "p95_all_completed_s": 18.5989,
+          "goodput_rps": 0.3,
+          "jain_normalized_goodput": 0.25,
+          "jain_raw_ok_rate": 0.25,
+          "per_tenant": {
+            "heavy": {
+              "offered": 143,
+              "ok": 3,
+              "ok_rate": 0.021
+            },
+            "light1": {
+              "offered": 29,
+              "ok": 0,
+              "ok_rate": 0.0
+            },
+            "light2": {
+              "offered": 25,
+              "ok": 0,
+              "ok_rate": 0.0
+            },
+            "light3": {
+              "offered": 22,
+              "ok": 0,
+              "ok_rate": 0.0
+            }
+          },
+          "llm_calls_completed": 2215,
+          "llm_calls_wasted": 2182,
+          "wasted_call_fraction": 0.9851,
+          "llm_calls_cancelled_mid_flight": 0,
+          "scheduler_stats": {
+            "submitted": 2215,
+            "completed": 2215
+          },
+          "wall_s": 24.75
+        },
+        {
+          "config": {
+            "name": "fair_naive",
+            "fair": true,
+            "deadline_propagation": false,
+            "cancel_tree": false,
+            "admission": false
+          },
+          "requests": 219,
+          "status": {
+            "ok": 9,
+            "late": 210
+          },
+          "on_time_rate": 0.0411,
+          "deadline_miss_rate_admitted": 0.9589,
+          "deadline_miss_or_reject_rate": 0.9589,
+          "p50_ok_s": 0.886,
+          "p95_ok_s": 1.4026,
+          "p95_all_completed_s": 19.5212,
+          "goodput_rps": 0.9,
+          "jain_normalized_goodput": 0.6532,
+          "jain_raw_ok_rate": 0.5129,
+          "per_tenant": {
+            "heavy": {
+              "offered": 143,
+              "ok": 1,
+              "ok_rate": 0.007
+            },
+            "light1": {
+              "offered": 29,
+              "ok": 1,
+              "ok_rate": 0.0345
+            },
+            "light2": {
+              "offered": 25,
+              "ok": 2,
+              "ok_rate": 0.08
+            },
+            "light3": {
+              "offered": 22,
+              "ok": 5,
+              "ok_rate": 0.2273
+            }
+          },
+          "llm_calls_completed": 2215,
+          "llm_calls_wasted": 2136,
+          "wasted_call_fraction": 0.9643,
+          "llm_calls_cancelled_mid_flight": 0,
+          "scheduler_stats": {
+            "submitted": 2215,
+            "completed": 2215
+          },
+          "wall_s": 24.66
+        },
+        {
+          "config": {
+            "name": "fair_deadline",
+            "fair": true,
+            "deadline_propagation": true,
+            "cancel_tree": true,
+            "admission": false
+          },
+          "requests": 219,
+          "status": {
+            "ok": 56,
+            "deadline_exceeded": 163
+          },
+          "on_time_rate": 0.2557,
+          "deadline_miss_rate_admitted": 0.7443,
+          "deadline_miss_or_reject_rate": 0.7443,
+          "p50_ok_s": 0.9591,
+          "p95_ok_s": 1.4429,
+          "p95_all_completed_s": 1.4429,
+          "goodput_rps": 5.6,
+          "jain_normalized_goodput": 0.9356,
+          "jain_raw_ok_rate": 0.7625,
+          "per_tenant": {
+            "heavy": {
+              "offered": 143,
+              "ok": 8,
+              "ok_rate": 0.0559
+            },
+            "light1": {
+              "offered": 29,
+              "ok": 15,
+              "ok_rate": 0.5172
+            },
+            "light2": {
+              "offered": 25,
+              "ok": 15,
+              "ok_rate": 0.6
+            },
+            "light3": {
+              "offered": 22,
+              "ok": 18,
+              "ok_rate": 0.8182
+            }
+          },
+          "llm_calls_completed": 963,
+          "llm_calls_wasted": 430,
+          "wasted_call_fraction": 0.4465,
+          "llm_calls_cancelled_mid_flight": 171,
+          "scheduler_stats": {
+            "submitted": 1237,
+            "completed": 963,
+            "killed_expired_running": 123,
+            "cancelled_queued": 59,
+            "expired_at_submit": 164,
+            "cancelled_running": 48,
+            "shed_expired_in_queue": 44
+          },
+          "wall_s": 11.24
+        },
+        {
+          "config": {
+            "name": "fifo_full",
+            "fair": false,
+            "deadline_propagation": true,
+            "cancel_tree": true,
+            "admission": true
+          },
+          "requests": 219,
+          "status": {
+            "rejected": 117,
+            "ok": 75,
+            "deadline_exceeded": 27
+          },
+          "on_time_rate": 0.3425,
+          "deadline_miss_rate_admitted": 0.2647,
+          "deadline_miss_or_reject_rate": 0.6575,
+          "p50_ok_s": 1.2217,
+          "p95_ok_s": 1.4408,
+          "p95_all_completed_s": 1.4408,
+          "goodput_rps": 7.5,
+          "jain_normalized_goodput": 0.5482,
+          "jain_raw_ok_rate": 0.952,
+          "per_tenant": {
+            "heavy": {
+              "offered": 143,
+              "ok": 48,
+              "ok_rate": 0.3357
+            },
+            "light1": {
+              "offered": 29,
+              "ok": 9,
+              "ok_rate": 0.3103
+            },
+            "light2": {
+              "offered": 25,
+              "ok": 12,
+              "ok_rate": 0.48
+            },
+            "light3": {
+              "offered": 22,
+              "ok": 6,
+              "ok_rate": 0.2727
+            }
+          },
+          "llm_calls_completed": 937,
+          "llm_calls_wasted": 294,
+          "wasted_call_fraction": 0.3138,
+          "llm_calls_cancelled_mid_flight": 20,
+          "scheduler_stats": {
+            "submitted": 971,
+            "completed": 937,
+            "shed_expired_in_queue": 11,
+            "cancelled_running": 4,
+            "killed_expired_running": 16,
+            "cancelled_queued": 3
+          },
+          "wall_s": 10.83
+        },
+        {
+          "config": {
+            "name": "full",
+            "fair": true,
+            "deadline_propagation": true,
+            "cancel_tree": true,
+            "admission": true
+          },
+          "requests": 219,
+          "status": {
+            "rejected": 96,
+            "ok": 77,
+            "deadline_exceeded": 46
+          },
+          "on_time_rate": 0.3516,
+          "deadline_miss_rate_admitted": 0.374,
+          "deadline_miss_or_reject_rate": 0.6484,
+          "p50_ok_s": 1.045,
+          "p95_ok_s": 1.4202,
+          "p95_all_completed_s": 1.4202,
+          "goodput_rps": 7.7,
+          "jain_normalized_goodput": 0.9178,
+          "jain_raw_ok_rate": 0.8571,
+          "per_tenant": {
+            "heavy": {
+              "offered": 143,
+              "ok": 29,
+              "ok_rate": 0.2028
+            },
+            "light1": {
+              "offered": 29,
+              "ok": 14,
+              "ok_rate": 0.4828
+            },
+            "light2": {
+              "offered": 25,
+              "ok": 17,
+              "ok_rate": 0.68
+            },
+            "light3": {
+              "offered": 22,
+              "ok": 17,
+              "ok_rate": 0.7727
+            }
+          },
+          "llm_calls_completed": 952,
+          "llm_calls_wasted": 193,
+          "wasted_call_fraction": 0.2027,
+          "llm_calls_cancelled_mid_flight": 55,
+          "scheduler_stats": {
+            "submitted": 1030,
+            "completed": 952,
+            "killed_expired_running": 33,
+            "shed_expired_in_queue": 11,
+            "cancelled_queued": 12,
+            "cancelled_running": 22,
+            "expired_at_submit": 33
+          },
+          "wall_s": 11.18
+        }
+      ]
+    },
+    {
+      "load_label": "low_8.4rps",
+      "rates": {
+        "heavy": 4.8,
+        "light1": 1.2,
+        "light2": 1.2,
+        "light3": 1.2
+      },
+      "seed": 7,
+      "slots": 8,
+      "slo_s": 1.5,
+      "duration_s": 10.0,
+      "runs": [
+        {
+          "config": {
+            "name": "fifo_naive",
+            "fair": false,
+            "deadline_propagation": false,
+            "cancel_tree": false,
+            "admission": false
+          },
+          "requests": 94,
+          "status": {
+            "ok": 81,
+            "late": 13
+          },
+          "on_time_rate": 0.8617,
+          "deadline_miss_rate_admitted": 0.1383,
+          "deadline_miss_or_reject_rate": 0.1383,
+          "p50_ok_s": 0.7696,
+          "p95_ok_s": 1.4354,
+          "p95_all_completed_s": 1.8482,
+          "goodput_rps": 8.1,
+          "jain_normalized_goodput": 0.9706,
+          "jain_raw_ok_rate": 0.9965,
+          "per_tenant": {
+            "heavy": {
+              "offered": 60,
+              "ok": 54,
+              "ok_rate": 0.9
+            },
+            "light1": {
+              "offered": 11,
+              "ok": 9,
+              "ok_rate": 0.8182
+            },
+            "light2": {
+              "offered": 13,
+              "ok": 10,
+              "ok_rate": 0.7692
+            },
+            "light3": {
+              "offered": 10,
+              "ok": 8,
+              "ok_rate": 0.8
+            }
+          },
+          "llm_calls_completed": 931,
+          "llm_calls_wasted": 156,
+          "wasted_call_fraction": 0.1676,
+          "llm_calls_cancelled_mid_flight": 0,
+          "scheduler_stats": {
+            "submitted": 931,
+            "completed": 931
+          },
+          "wall_s": 10.91
+        },
+        {
+          "config": {
+            "name": "fair_naive",
+            "fair": true,
+            "deadline_propagation": false,
+            "cancel_tree": false,
+            "admission": false
+          },
+          "requests": 94,
+          "status": {
+            "ok": 78,
+            "late": 16
+          },
+          "on_time_rate": 0.8298,
+          "deadline_miss_rate_admitted": 0.1702,
+          "deadline_miss_or_reject_rate": 0.1702,
+          "p50_ok_s": 0.7537,
+          "p95_ok_s": 1.2771,
+          "p95_all_completed_s": 1.9763,
+          "goodput_rps": 7.8,
+          "jain_normalized_goodput": 0.9751,
+          "jain_raw_ok_rate": 0.9775,
+          "per_tenant": {
+            "heavy": {
+              "offered": 60,
+              "ok": 48,
+              "ok_rate": 0.8
+            },
+            "light1": {
+              "offered": 11,
+              "ok": 11,
+              "ok_rate": 1.0
+            },
+            "light2": {
+              "offered": 13,
+              "ok": 9,
+              "ok_rate": 0.6923
+            },
+            "light3": {
+              "offered": 10,
+              "ok": 10,
+              "ok_rate": 1.0
+            }
+          },
+          "llm_calls_completed": 931,
+          "llm_calls_wasted": 185,
+          "wasted_call_fraction": 0.1987,
+          "llm_calls_cancelled_mid_flight": 0,
+          "scheduler_stats": {
+            "submitted": 931,
+            "completed": 931
+          },
+          "wall_s": 11.0
+        },
+        {
+          "config": {
+            "name": "fair_deadline",
+            "fair": true,
+            "deadline_propagation": true,
+            "cancel_tree": true,
+            "admission": false
+          },
+          "requests": 94,
+          "status": {
+            "ok": 86,
+            "deadline_exceeded": 8
+          },
+          "on_time_rate": 0.9149,
+          "deadline_miss_rate_admitted": 0.0851,
+          "deadline_miss_or_reject_rate": 0.0851,
+          "p50_ok_s": 0.7525,
+          "p95_ok_s": 1.2621,
+          "p95_all_completed_s": 1.2621,
+          "goodput_rps": 8.6,
+          "jain_normalized_goodput": 0.9868,
+          "jain_raw_ok_rate": 0.9896,
+          "per_tenant": {
+            "heavy": {
+              "offered": 60,
+              "ok": 55,
+              "ok_rate": 0.9167
+            },
+            "light1": {
+              "offered": 11,
+              "ok": 11,
+              "ok_rate": 1.0
+            },
+            "light2": {
+              "offered": 13,
+              "ok": 10,
+              "ok_rate": 0.7692
+            },
+            "light3": {
+              "offered": 10,
+              "ok": 10,
+              "ok_rate": 1.0
+            }
+          },
+          "llm_calls_completed": 903,
+          "llm_calls_wasted": 67,
+          "wasted_call_fraction": 0.0742,
+          "llm_calls_cancelled_mid_flight": 11,
+          "scheduler_stats": {
+            "submitted": 915,
+            "completed": 903,
+            "killed_expired_running": 9,
+            "cancelled_running": 2,
+            "shed_expired_in_queue": 1
+          },
+          "wall_s": 10.76
+        },
+        {
+          "config": {
+            "name": "fifo_full",
+            "fair": false,
+            "deadline_propagation": true,
+            "cancel_tree": true,
+            "admission": true
+          },
+          "requests": 94,
+          "status": {
+            "ok": 82,
+            "deadline_exceeded": 7,
+            "rejected": 5
+          },
+          "on_time_rate": 0.8723,
+          "deadline_miss_rate_admitted": 0.0787,
+          "deadline_miss_or_reject_rate": 0.1277,
+          "p50_ok_s": 0.7821,
+          "p95_ok_s": 1.4431,
+          "p95_all_completed_s": 1.4431,
+          "goodput_rps": 8.2,
+          "jain_normalized_goodput": 0.9672,
+          "jain_raw_ok_rate": 0.9904,
+          "per_tenant": {
+            "heavy": {
+              "offered": 60,
+              "ok": 55,
+              "ok_rate": 0.9167
+            },
+            "light1": {
+              "offered": 11,
+              "ok": 8,
+              "ok_rate": 0.7273
+            },
+            "light2": {
+              "offered": 13,
+              "ok": 10,
+              "ok_rate": 0.7692
+            },
+            "light3": {
+              "offered": 10,
+              "ok": 9,
+              "ok_rate": 0.9
+            }
+          },
+          "llm_calls_completed": 882,
+          "llm_calls_wasted": 93,
+          "wasted_call_fraction": 0.1054,
+          "llm_calls_cancelled_mid_flight": 6,
+          "scheduler_stats": {
+            "submitted": 889,
+            "completed": 882,
+            "cancelled_running": 3,
+            "killed_expired_running": 3,
+            "shed_expired_in_queue": 1
+          },
+          "wall_s": 10.53
+        },
+        {
+          "config": {
+            "name": "full",
+            "fair": true,
+            "deadline_propagation": true,
+            "cancel_tree": true,
+            "admission": true
+          },
+          "requests": 94,
+          "status": {
+            "ok": 87,
+            "rejected": 3,
+            "deadline_exceeded": 4
+          },
+          "on_time_rate": 0.9255,
+          "deadline_miss_rate_admitted": 0.044,
+          "deadline_miss_or_reject_rate": 0.0745,
+          "p50_ok_s": 0.7266,
+          "p95_ok_s": 1.247,
+          "p95_all_completed_s": 1.247,
+          "goodput_rps": 8.7,
+          "jain_normalized_goodput": 0.9868,
+          "jain_raw_ok_rate": 0.9897,
+          "per_tenant": {
+            "heavy": {
+              "offered": 60,
+              "ok": 56,
+              "ok_rate": 0.9333
+            },
+            "light1": {
+              "offered": 11,
+              "ok": 11,
+              "ok_rate": 1.0
+            },
+            "light2": {
+              "offered": 13,
+              "ok": 10,
+              "ok_rate": 0.7692
+            },
+            "light3": {
+              "offered": 10,
+              "ok": 10,
+              "ok_rate": 1.0
+            }
+          },
+          "llm_calls_completed": 889,
+          "llm_calls_wasted": 32,
+          "wasted_call_fraction": 0.036,
+          "llm_calls_cancelled_mid_flight": 6,
+          "scheduler_stats": {
+            "submitted": 896,
+            "completed": 889,
+            "killed_expired_running": 4,
+            "cancelled_running": 2,
+            "cancelled_queued": 1
+          },
+          "wall_s": 10.55
+        }
+      ]
+    }
+  ]
+}
