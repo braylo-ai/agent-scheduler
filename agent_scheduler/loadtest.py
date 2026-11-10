@@ -3,7 +3,7 @@
 One heavy tenant offers 4x the load of three light tenants. Every config runs the same
 pre-drawn arrivals and call trees. Output: results/loadtest.json + results/loadtest.md.
 
-    python -m agent_scheduler.loadtest            # full run (~2 min)
+    python -m agent_scheduler.loadtest            # full run (~2.5 min)
     python -m agent_scheduler.loadtest --quick    # smoke run
 """
 

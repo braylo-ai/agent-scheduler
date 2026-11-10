@@ -69,7 +69,7 @@ What the numbers say (for this mock workload):
 - Admission control trades rejected requests for fewer wasted calls: `full` vs `fair_deadline` on-time 0.352 vs 0.256 and wasted calls 0.203 vs 0.447.
 - At low load the full stack still helps tail misses (0.044 vs 0.138 admitted-miss rate) because sub-agents that cannot finish are cut early.
 
-Reproduce: `python -m agent_scheduler.loadtest` (~2 min, wall-clock; rerun numbers will vary a little with machine load).
+Reproduce: `python -m agent_scheduler.loadtest` (~2.5 min: 136 s of runs in the committed log; wall-clock, rerun numbers will vary a little with machine load).
 
 ## Tests
 22 tests (`pytest -q`): deadline arithmetic, cancel cascade / late children / callbacks / detach, FIFO + DRR ordering, weights, EDF, admission caps and feasibility, real asyncio runs for queued and running cancellation, queue shedding, running-job kill at deadline, sibling fail-fast, metrics (percentile, Jain, water-filling).
